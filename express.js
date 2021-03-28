@@ -2,12 +2,12 @@ const express = require('express');
 
 const app = express();
 
-const dateValidator = require('./middleware/dateValidation');
-const stopper = require('./middleware/deleteStop');
-const errorCatching = require('./middleware/errorCatcher');
-const logging = require('./middleware/logger');
-const parseJson = require('./middleware/parser');
-const randomResponse = require('./middleware/random');
+const dateValidator = require('./middlewares/dateValidation');
+const stopper = require('./middlewares/deleteStop');
+const errorCatching = require('./middlewares/errorCatcher');
+const logging = require('./middlewares/logger');
+const parseJson = require('./middlewares/parser');
+const randomResponse = require('./middlewares/random');
 
 app.use('/', parseJson);
 app.use('/', stopper);
