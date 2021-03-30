@@ -1,19 +1,9 @@
-const express = require('express');
+const Express = require('express');
 
-const app = express();
+const app = Express();
 
-const dateValidator = require('./middlewares/dateValidation');
-const stopper = require('./middlewares/deleteStop');
-const errorCatching = require('./middlewares/errorCatcher');
-const logging = require('./middlewares/logger');
-const parseJson = require('./middlewares/parser');
-const randomResponse = require('./middlewares/random');
+const router = require('./routes/router');
 
-app.use('/', parseJson);
-app.use('/', stopper);
-app.use('/', dateValidator);
-app.use('/', logging);
-app.use('/', randomResponse);
-app.use('/', errorCatching);
+app.all('/', router);
 
 app.listen(8080);
