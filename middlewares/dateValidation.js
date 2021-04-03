@@ -1,4 +1,4 @@
-// const { StatusCodes, ReasonPhrases } = require('http-status-codes');
+const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 
 module.exports = (req, res, next) => {
   let datesV = req.headers['date-validation'] || req.query['date-validation'];
@@ -7,12 +7,12 @@ module.exports = (req, res, next) => {
   datesV = parseInt(datesV, 10);
   if (!datesV || Number.isNaN(datesV)) {
     console.log('oops', datesV, 'is not a number', typeof datesV, Number.isNaN(datesV));
-    return res.status(401).end();
+    return res.status(StatusCodes.METHOD_NOT_ALLOWED).send(ReasonPhrases.METHOD_NOT_ALLOWED).end();
   }
 
   if (req.headers['date-validation'] && req.query['date-validation'] && req.headers['date-validation'] !== req.query['date-validation']) {
     console.log('both dates are defined, but not the same');
-    return res.status(401).end();
+    return res.status(StatusCodes.METHOD_NOT_ALLOWED).send(ReasonPhrases.METHOD_NOT_ALLOWED).end();
   }
 
   const serverTime = Date.now() / 1000;
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
   const timeDiff = Math.abs(datesV - serverTime);
   if (timeDiff > FIVEMINS) {
     console.log('CANCELLING REQUEST', timeDiff);
-    return res.status(401).end();
+    return res.status(StatusCodes.METHOD_NOT_ALLOWED).send(ReasonPhrases.METHOD_NOT_ALLOWED).end();
   }
   console.log(timeDiff, '- continuing request');
 
