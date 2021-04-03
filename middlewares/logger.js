@@ -13,7 +13,7 @@ const logger = win.createLogger({
   ],
 });
 
-exports.logs = (req, res, next) => {
+module.exports = (req, res, next) => {
   logger.log({
     level: 'info',
     serverTime: req.serverTime,
