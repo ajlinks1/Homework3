@@ -8,8 +8,6 @@ module.exports = (req, res, next) => {
   if ((getRandomNum(100, 1) % 2) === 0) {
     return res.status(StatusCodes.OK).send('Hello World!');
   }
-  res.send('Oops');
-  // throw new Error('Oops');
 
-  next();
+  throw new Error('Oops');
 };
